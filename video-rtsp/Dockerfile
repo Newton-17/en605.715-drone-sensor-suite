@@ -10,7 +10,7 @@ RUN apt-get update \
     && git clone https://github.com/mpromonet/v4l2rtspserver.git
 
 WORKDIR /v4l2rstpserver
-RUN cmake \
+RUN cmake . \
 	&& make install \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/
 
