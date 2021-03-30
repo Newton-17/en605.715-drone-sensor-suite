@@ -13,7 +13,7 @@ services:
       frame_width: 1080
       video_port: 8554
       fps: 30
-    privleged: true
+    privileged: true
   gpsd:
     build:
       context: ./gpsd/
