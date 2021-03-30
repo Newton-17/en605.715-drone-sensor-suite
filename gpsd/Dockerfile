@@ -6,4 +6,5 @@ RUN apt update \
 
 ENV gpsd_device /dev/ttyACM0
 
+ENTRYPOINT ["bash"]
 CMD ["gpsd -N -n -G $gpsd_device"]
