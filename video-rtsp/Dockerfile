@@ -7,7 +7,7 @@ ARG ARCH=armv7l
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates xz-utils cmake make pkg-config git wget \
-	&& git clone https://github.com/raspberrypi/tools.git \
+	&& git clone https://github.com/raspberrypi/tools.git
 
 RUN export PATH=/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin:$PATH \
     && git clone https://github.com/mpromonet/v4l2rtspserver.git \
