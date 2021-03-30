@@ -1,6 +1,8 @@
 FROM ubuntu:18.04
 
-RUN apt install -y --no-install-recommends gpsd
+RUN apt update \
+    && apt install -y --no-install-recommends gpsd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/
 
 ENV gpsd_device /dev/ttyAMA0
 
