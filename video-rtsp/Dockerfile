@@ -6,7 +6,7 @@ WORKDIR /
 ARG ARCH=armv7l
 
 RUN apt-get update \
-    && apt install -y --no-install-recommends ca-certificates g++ autoconf automake libtool xz-utils cmake make pkg-config git wget git
+    && apt install -y --no-install-recommends ca-certificates g++ autoconf automake libtool xz-utils cmake make pkg-config git wget git \
     && git clone https://github.com/mpromonet/v4l2rtspserver.git
 
 WORKDIR /v4l2rstpserver
