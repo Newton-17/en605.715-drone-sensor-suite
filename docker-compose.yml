@@ -21,3 +21,5 @@ services:
       - "2947:2947"
     devices:
       - "/dev/ttyAMA0:/dev/ttyAMA0"
+    environment:
+      gpsd_device: /dev/ttyAMA0

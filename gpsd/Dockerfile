@@ -2,6 +2,6 @@ FROM linarotechnologies/alpine:edge
 
 RUN apk add --no-cache gpsd
 
-EXPOSE 2947
+ENV gpsd_device /dev/ttyAMA0
 
-ENTRYPOINT ["/bin/sh", "-c", "/sbin/syslogd -S -O - -n & exec /usr/sbin/gpsd -N -n -G ${*}","--"]
+CMD ["gpsd -N -n -G $gps_interface_path"]
