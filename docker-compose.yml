@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  video-rtsp:
+    image: mpromonet/v4l2rtspserver
+    ports:
+      - "8554:8554"
+    environment:
+      device: /dev/video0
+  gpsd:
+    image: "redis:alpine"
