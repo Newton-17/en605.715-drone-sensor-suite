@@ -8,7 +8,7 @@ RUN apt-get update \
     && apt install -y --no-install-recommends ca-certificates g++ autoconf automake libtool xz-utils cmake make pkg-config git wget git \
     && git clone https://github.com/mpromonet/v4l2rtspserver.git
 
-WORKDIR /v4l2rstpserver
+WORKDIR /v4l2rtspserver
 RUN cmake . \
 	&& make install \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/
