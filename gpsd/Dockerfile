@@ -1,7 +1,7 @@
-FROM linarotechnologies/alpine:edge
+FROM ubuntu:18.04
 
-RUN apk add --no-cache gpsd
+RUN apt isntall -y --no-install-recommends gpsd
 
 ENV gpsd_device /dev/ttyAMA0
 
-CMD ["gpsd -N -n -G $gps_interface_path"]
+CMD ["gpsd -N -n -G $gpsd_device"]
