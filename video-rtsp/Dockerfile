@@ -14,11 +14,9 @@ RUN cmake . \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/
 
 
-#FROM balenalib/raspberry-pi
+ENV video_port 1600
+ENV frame_width 1920
+ENV frame_height 1080
+ENV fps 30
 
-#WORKDIR /usr/local/share/v4l2rtspserver
-#COPY --from=builder /usr/local/bin/ /usr/local/bin/
-#COPY --from=builder /usr/local/share/v4l2rtspserver/ /usr/local/share/v4l2rtspserver/
-
-ENTRYPOINT [ "/usr/local/bin/v4l2rtspserver" ]
-CMD [ "-H $frame_height -W $frame_width -I'0.0.0.0' -P $video_port -u 'pi-cam' -F $fps" ]
+CMD [ "sh", "-c", "/usr/local/bin/v4l2rtspserver -H $frame_height -W $frame_width -I'0.0.0.0' -P $video_port -u'cam1' -F $fps" ]
