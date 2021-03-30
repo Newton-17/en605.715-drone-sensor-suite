@@ -10,7 +10,7 @@ RUN apt-get update \
     && git clone https://github.com/mpromonet/v4l2rtspserver.git
 
 WORKDIR /v4l2rstpserver
-RUN cmake -DCMAKE_SYSTEM_PROCESSOR=${ARCH} -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++ -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY . \
+RUN cmake \
 	&& make install \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/
 
