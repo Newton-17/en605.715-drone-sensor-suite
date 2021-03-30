@@ -1,9 +1,12 @@
-version: "3.9"
+version: "3.3"
 services:
   video-rtsp:
     image: mpromonet/v4l2rtspserver
     ports:
       - "8554:8554"
+    devices:
+      - "/dev/video0:/dev/video0"
+      - "/dev/video1:/dev/video1"
     environment:
       device: /dev/video0
   gpsd:
