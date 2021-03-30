@@ -10,7 +10,10 @@ apt update
 apt install git
 
 echo "Installing Docker / Docker-Compose"
-apt install docker docker-compose
+apt install docker docker-compose 
+
+echo "Installing Video Nice To Haves"
+apt install v4l-utils
 
 echo "Configuring GPSD Device"
 apt install gpsd
@@ -21,7 +24,7 @@ git clone https://github.com/Newton-17/en605.715-drone-sensor-suite.git
 
 echo "Building Repo"
 cd /opt/en605.715-drone-sensor-suite
-docker-compose build .
+docker-compose build
 
 echo "Starting Streaming Applications"
 docker-compose up

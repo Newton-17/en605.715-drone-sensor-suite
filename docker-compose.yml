@@ -1,13 +1,17 @@
 version: "3.3"
 services:
   video-rtsp:
-    image: mpromonet/v4l2rtspserver
+    build:
+      context: ./video-rtsp/
     ports:
       - "8554:8554"
     devices:
       - "/dev/video0:/dev/video0"
       - "/dev/video1:/dev/video1"
     environment:
-      device: /dev/video0
+      frame_height: 1920
+      frame_width: 1080
+      video_port: 8554
+      fps: 30
   gpsd:
     image: "redis:alpine"
