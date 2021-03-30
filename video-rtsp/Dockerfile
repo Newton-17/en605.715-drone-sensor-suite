@@ -6,11 +6,9 @@ WORKDIR /
 ARG ARCH=armv7l
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates xz-utils cmake make pkg-config git wget \
-	&& git clone https://github.com/raspberrypi/tools.git
+    && apt install -y --no-install-recommends ca-certificates g++ autoconf automake libtool xz-utils cmake make pkg-config git wget git
+    && git clone https://github.com/mpromonet/v4l2rtspserver.git
 
-RUN export PATH=/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin:$PATH \
-    && git clone https://github.com/mpromonet/v4l2rtspserver.git \
 WORKDIR /v4l2rstpserver
 RUN cmake -DCMAKE_SYSTEM_PROCESSOR=${ARCH} -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++ -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY . \
 	&& make install \
