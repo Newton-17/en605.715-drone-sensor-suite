@@ -9,7 +9,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates xz-utils cmake make pkg-config git wget \
 	&& git clone --depth 1 https://github.com/raspberrypi/tools.git /rpi_tools \
     && export PATH=/rpi_tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin:$PATH \
-    && git clone https://github.com/mpromonet/v4l2rtspserver.git 
+    && git clone https://github.com/mpromonet/v4l2rtspserver.git \
     && cd v4l2rstpserver
     && cmake -DCMAKE_SYSTEM_PROCESSOR=${ARCH} -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++ -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY . \
 	&& make install \
