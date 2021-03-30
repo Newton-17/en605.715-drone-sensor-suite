@@ -7,16 +7,16 @@ if [[ $(id -u) -ne 0 ]] ; then echo "This script requires root privileges." ; ex
 
 echo "Apt Update"
 apt update
-apt install git
+apt install -y --no-install-recommends git
 
 echo "Installing Docker / Docker-Compose"
-apt install docker docker-compose 
+apt install -y --no-install-recommends docker docker-compose 
 
 echo "Installing Video Nice To Haves"
-apt install v4l-utils
+apt install -y --no-install-recommends v4l-utils
 
 echo "Configuring GPSD Device"
-apt install gpsd
+apt remove -y gpsd
 
 echo "Cloning REPO"
 cd /opt
