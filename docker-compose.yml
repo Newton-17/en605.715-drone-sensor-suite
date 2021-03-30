@@ -14,4 +14,9 @@ services:
       video_port: 8554
       fps: 30
   gpsd:
-    image: "redis:alpine"
+    build:
+      context: ./gpsd/
+    ports:
+      - "2947:2947"
+    devices:
+      - "/dev/ttyAMA0:/dev/ttyAMA0"
