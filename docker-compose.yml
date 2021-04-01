@@ -14,6 +14,7 @@ services:
       video_port: 8554
       fps: 30
     privileged: true
+    restart: always
   gpsd:
     build:
       context: ./gpsd/
@@ -25,3 +26,4 @@ services:
     environment:
       gpsd_device: /dev/ttyACM0
     privileged: true
+    restart: always
