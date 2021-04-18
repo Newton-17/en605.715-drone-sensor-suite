@@ -9,8 +9,8 @@ services:
       - "/dev/video0:/dev/video0"
       - "/dev/video1:/dev/video1"
     environment:
-      frame_height: 1920
-      frame_width: 1080
+      frame_height: 600
+      frame_width: 800
       video_port: 8554
       fps: 30
     privileged: true
