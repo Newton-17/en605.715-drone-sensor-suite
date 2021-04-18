@@ -1,36 +1,54 @@
+"""
+    Title: Main.py
+    Desc: Read Serial and make it available at /serial
+"""
+
+
+import os
 import sys
-import glob
-import serial
+import time
+import threading
 
+from flask import Flask, jsonify
+import serial # This is actual pyserial
 
-def serial_ports():
-    """ Lists serial port names
+# Flask Info
+IP = os.getenv('flask_ip') or '0.0.0.0'
+PORT = os.getenv('flask_port') or 5000
+PORT = int(PORT)
 
-        :raises EnvironmentError:
-            On unsupported or unknown platforms
-        :returns:
-            A list of the serial ports available on the system
-    """
-    if sys.platform.startswith('win'):
-        ports = ['COM%s' % (i + 1) for i in range(256)]
-    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
-        # this excludes your current terminal "/dev/tty"
-        ports = glob.glob('/dev/tty[A-Za-z]*')
-    elif sys.platform.startswith('darwin'):
-        ports = glob.glob('/dev/tty.*')
-    else:
-        raise EnvironmentError('Unsupported platform')
+app = Flask(__name__)
 
-    result = []
-    for port in ports:
-        try:
-            s = serial.Serial(port)
-            s.close()
-            result.append(port)
-        except Exception:
-            pass
-    return result
+# Serial Info
+last_read_json = ""
 
+def flask_thread():
+    app.run(debug=True, use_reloader=False, host=IP, port=PORT)
+
+@app.route('/serial', methods=['GET'])
+def get_serial():
+    return jsonify(last_read_json)
 
 if __name__ == '__main__':
-    print(serial_ports())
+    conn = serial.Serial(
+            port='/dev/ttyUSB0',
+            baudrate=9600)
+
+    if not conn.isOpen():
+        conn.open()
+
+    if not conn.isOpen():
+        sys.exit(1)
+
+    # Start Webserver on another thread
+    thread = threading.Thread(target=flask_thread)
+    thread.start()
+
+    while True:
+        last_read = conn.readline().decode().strip()
+        last_read_list = last_read.split(',')
+        last_read_json = {
+                'x': last_read_list[0],
+                'y': last_read_list[1],
+                'z': last_read_list[2]
+                }
