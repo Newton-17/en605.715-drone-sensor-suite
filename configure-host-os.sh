@@ -11,21 +11,21 @@ apt install -y --no-install-recommends git
 
 # Access Point Update
 echo "Configuring Access Point"
-apt install hostapd dnsmasq bridge-utils
+apt install hostapd dnsmasq bridge-utils dhcpcd5
 systemctl stop hostapd
 systemctl stop dnsmasq
 
-cat <<EOT >> /etc/dhcpd.conf
+cat <<EOT >> /etc/dhcpcd.conf
 interface wlan0
 static ip_address=192.168.0.10/24
-domain=wlan
-address=/gw.wlan/192.168.0.1
 EOT
 
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 cat <<EOT >> /etc/dnsmasq.conf
 interface=wlan0
-  dhcp-range=192.168.0.11,192.168.0.30,255.255.255.0,24h
+dhcp-range=192.168.0.11,192.168.0.30,255.255.255.0,24h
+domain=wlan
+address=/gw.wlan/192.168.0.10
 EOT
 
 cat <<EOT >> /etc/hostapd/hostapd.conf
