@@ -5,6 +5,7 @@
 
 
 import os
+import subprocess
 import sys
 import time
 import threading
@@ -52,3 +53,6 @@ if __name__ == '__main__':
                 'y': last_read_list[1],
                 'z': last_read_list[2]
                 }
+        echo_cmd = "echo \"{}\" >> /dev/rfcomm0".format(last_read)
+
+        subprocess.call(echo_cmd, shell=True)
