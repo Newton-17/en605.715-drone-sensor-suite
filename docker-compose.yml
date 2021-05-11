@@ -27,12 +27,3 @@ services:
       gpsd_device: /dev/ttyACM0
     privileged: true
     restart: always
-  imu-reader:
-    build:
-      context: ./imu-reader/
-    ports:
-      - "5000:5000"
-    devices:
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
-    privileged: true
-    restart: always
